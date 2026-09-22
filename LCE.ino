@@ -53,5 +53,7 @@ void loop() {
       Serial.read();
     }
   }
+
+##As i previously said on readme it as very raw code, just the core, it only change colors only this
 }
 
