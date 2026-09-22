@@ -27,4 +27,4 @@ RGB(0, 0, 255)     → Blue
 
 Ok so i did some research and i'll need to use the ESP32-S3-Box board on arduino IDE, and the main code that makes the rgb led blinks is:
 
-´´´led.setPixelColor(0, led.Color(r, g, b));´´´
+```led.setPixelColor(0, led.Color(r, g, b));```
