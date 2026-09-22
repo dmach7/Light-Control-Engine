@@ -1,4 +1,4 @@
-```cpp
+
 #include <Adafruit_NeoPixel.h>
 
 #define LED_PIN 48
@@ -15,10 +15,8 @@ void setup() {
 
   Serial.println("RGB LED Control");
   delay(500);
-  Serial.println("Enter a rgb code")
-  Serial.println("Example: 255 255 255
-
-  No comas")
+  Serial.println("Enter a rgb code");
+  Serial.println("Example: 255 255 255 | No comas");
   
 }
 
@@ -50,10 +48,10 @@ void loop() {
     Serial.print(greenValue);
     Serial.print(", ");
     Serial.println(blueValue);
-    
+
     while (Serial.available() > 0) {
       Serial.read();
     }
   }
 }
-```
+
