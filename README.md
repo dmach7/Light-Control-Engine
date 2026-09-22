@@ -14,19 +14,16 @@ RGB color is represented by three channels:
 - **G** — Green
 - **B** — Blue
 
-Each channel can have a value from 0 to 255, resulting in:
-256³ = 16.777.216 colors
+Each channel can have a value from `0` to `255`, resulting in:
 
-so for example here are some common color codes
+```256 × 256 × 256 = 16,777,216```
 
-RGB(100, 100, 100) → Low-intensity white
-RGB(255, 255, 255) → Maximum-intensity white
-RGB(255, 0, 0)     → Red
-RGB(0, 255, 0)     → Green
-RGB(0, 0, 255)     → Blue
-
-Ok so i did some research and i'll need to use the ESP32-S3-Box board on arduino IDE, and the main code that makes the rgb led blinks is:
+So after some test and research i could finally find the code that actually switches the rgb light and it is:
 
 ```led.setPixelColor(0, led.Color(r, g, b));```
 
-I'll do some research to make the program read the serial and display the color
+and this is the one line that makes the led physically apply the change for the led
+
+```led.show();```
+
+so this is the raw code, i'll need to create something that reads serial data and apply for the led. 
