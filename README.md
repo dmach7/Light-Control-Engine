@@ -27,3 +27,6 @@ and this is the one line that makes the led physically apply the change for the 
 ```led.show();```
 
 so this is the raw code, i'll need to create something that reads serial data and apply for the led. 
+
+## Version 2.0
+
