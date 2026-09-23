@@ -41,3 +41,23 @@ NamedColor colors[] = {
   {"red",     255, 0,   0  },
 ```
 
+i added this with a bunch of other colors so you don't really need to look like an neandertal searching for RGB codes! yayy
+
+also added hex code support
+
+```
+#FF5500
+#00FF88
+```
+
+input priority: the prompt follows a priority of commands:
+
+```
+named color → hex → rgb values → "Not recognised"
+```
+And also to avoid dum ahh user frustration i added a script that every system should have
+
+This is it for now, thanks for suporting(no one is supporting) but thanks anyway
+
+
+
