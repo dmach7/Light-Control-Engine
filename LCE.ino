@@ -1,4 +1,3 @@
-
 #include <Adafruit_NeoPixel.h>
 
 #define LED_PIN 48
