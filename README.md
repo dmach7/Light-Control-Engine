@@ -30,3 +30,14 @@ so this is the raw code, i'll need to create something that reads serial data an
 
 ## Version 2.0
 
+In the second version i brought some good updates!
+
+Now you can choose a color WITHOUT having to type the rgb code.
+
+Basically i added an array with maped colors, example red
+
+```
+NamedColor colors[] = {
+  {"red",     255, 0,   0  },
+```
+
