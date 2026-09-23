@@ -54,8 +54,8 @@ void setup() {
 
   Serial.println("RGB LED Control");
   delay(500);
-  Serial.println("Enter a rgb code or color name");
-  Serial.println("Example: 255 255 255  or  yellow");
+  Serial.println("Enter a rgb code, hex or color name");
+  Serial.println("Example: 255 255 255  or  yellow  or  #FF5500");
 }
 
 void loop() {
@@ -79,8 +79,17 @@ void loop() {
         break;
       }
     }
+//hex support block code
+    if (!found && input[0] == '#') {
+      int r, g, b;
+      if (sscanf(input + 1, "%02x%02x%02x", &r, &g, &b) == 3) {
+        setColor(r, g, b);
+        found = true;
+      } else {
+        Serial.println("bad hex");  // u sure thats a valid hex bro
+      }
+    }
 
-    // not a name, try to parse as rgb
     if (!found) {
       int r = 0, g = 0, b = 0;
       // sscanf is cleaner here tbh
