@@ -44,7 +44,7 @@ NamedColor colors[] = {
 i added this with a bunch of other colors so you don't really need to look like an neandertal searching for RGB codes! yayy
 
 > [!TIP]
-> You can add more colors as you want, so if you want to add like turkish-blue, just add it to the array following the pattern
+> You can add more colors as you want, so if you want to add like turkish-blue, just add it to the array following the pattern.
 
 also added hex code support
 
