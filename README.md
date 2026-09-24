@@ -72,7 +72,8 @@ void toLowerStr(char* str) {
 
 Ignore angry dev comment
 
-This is it for now, thanks for suporting(no one is supporting) but thanks anyway
+## Version 3.0
 
+3.0 almost coming out let's gooo
 
 
