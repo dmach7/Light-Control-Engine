@@ -79,7 +79,8 @@ void loop() {
         break;
       }
     }
-//hex support block code
+
+    //hex support block code
     if (!found && input[0] == '#') {
       int r, g, b;
       if (sscanf(input + 1, "%02x%02x%02x", &r, &g, &b) == 3) {
@@ -88,6 +89,17 @@ void loop() {
       } else {
         Serial.println("bad hex");  // u sure thats a valid hex bro
       }
+    }
+
+    // brightness block
+    if (!found && strncmp(input, "brightness ", 11) == 0) {
+      int val = atoi(input + 11);
+      val = constrain(val, 0, 255);
+      rgbLed.setBrightness(val);
+      rgbLed.show();
+      Serial.print("Brightness set to: ");
+      Serial.println(val);
+      found = true;
     }
 
     if (!found) {
