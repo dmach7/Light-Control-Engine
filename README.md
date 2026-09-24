@@ -74,7 +74,7 @@ Ignore angry dev comment
 
 ## Version 3.0
 
-For the 3.0 i'm adding the brightness function!
+### Brightness function
 
 On the currently using library there's already a function for that, so the code it's basically done
 
@@ -94,4 +94,17 @@ if (!found && strncmp(input, "brightness ", 11) == 0) {
   found = true;
 }
 ```
-Now i only need to find out where to put this on the actual code
+The code is already implemented between the hex support code and the rgb parser!
+
+### Color attaching function
+
+This function will allow the user to attach a certain color to a certain name without having to edit the code so for example we have:
+
+Before:
+```
+NamedColor colors[] = {
+  {"red",     255, 0,   0  },
+```
+And the user is mid use of the system, don't want to go back and add the color, so he can just do:
+```catalog (
+
