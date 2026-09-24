@@ -94,4 +94,4 @@ if (!found && strncmp(input, "brightness ", 11) == 0) {
   found = true;
 }
 ```
-
+Now i only need to find out where to put this on the actual code
