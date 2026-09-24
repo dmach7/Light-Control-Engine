@@ -1,31 +1,33 @@
 ## This file only contains CLI commands of the project
 
-### array
-
-serial input:
-
-array [function] (delete, editcode, rename, add)
-
-delete: system will display the current array in numerical order and ask for a number to delete, after input system will return "Color: name, Number # was deleted"
-
-editcode: system will display the current array in numerical order and ask for a number to edit, after input system will ask for a new color code, example "rgb(255 255 255)" or #FFFFFF, after this system will edit the color code and return "Color: name, number # was changed to (### ### ###) code or #xxxxxx depending on what was user input
-
-rename: system will display the current array in numerical order and ask for a number to rename, after input system will ask for a new name, after input system will return "Color number # was changed to: name"
-
-add: system will ask for a name, like "Magenta" after this system will ask for a code like "#FF00FF" or "rgb(255 0 255)" after code input system will display "Color sucessfully attached
-
-**This is all the cli of the array command**
+### /help
+serial input: /help
+returns: "Check the full CLI reference at: https://github.com/dmach7/Light-Control-Engine — navigate to cli.md in the main tree"
 
 ### display
+serial input: display [name | rgb(r g b) | #FFFFFF]
+displays the color on the LED, does not save anything to the system
+after displaying, system asks: "Want to define brightness? Y/N"
+if Y: system asks "Brightness (0-255):" and applies
+if N: keeps current brightness
+brightness set this way is temporary and resets on next display command
 
-serial input:
-
-display [rgb code, name in array or hex code] fairly simple, the core command of the project
-
-Example:
-
+examples:
 display rgb(255 255 255)
-
 display #FFFFFF
-
 display green
+
+### array
+serial input: array [function]
+available functions: add, delete, editcode, rename
+colors persist in NVS/Preferences and survive resets
+
+add: system asks for a name → then asks for a code (rgb or hex) → asks "Want to set brightness for this color? Y/N" → if Y asks "Brightness (0-255):" and saves alongside the color → if N saves with brightness 255 → returns "Color successfully attached"
+
+delete: system displays full array in numerical order → asks for a number → returns "Color: name, Number # was deleted"
+
+editcode: system displays full array in numerical order → asks for a number → asks for new code (rgb or hex) → returns "Color: name, Number # was changed to (### ### ###) or #xxxxxx"
+
+rename: system displays full array in numerical order → asks for a number → asks for new name → returns "Color number # was changed to: name"
+
+unknown function: returns "unknown array function, check https://github.com/dmach7/Light-Control-Engine cli.md"
