@@ -1,6 +1,6 @@
 ## This file only contains CLI commands of the project
 
-### Array
+### array
 
 serial input:
 
@@ -15,3 +15,17 @@ rename: system will display the current array in numerical order and ask for a n
 add: system will ask for a name, like "Magenta" after this system will ask for a code like "#FF00FF" or "rgb(255 0 255)" after code input system will display "Color sucessfully attached
 
 **This is all the cli of the array command**
+
+### display
+
+serial input:
+
+display [rgb code, name in array or hex code] fairly simple, the core command of the project
+
+Example:
+
+display rgb(255 255 255)
+
+display #FFFFFF
+
+display green
