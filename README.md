@@ -79,7 +79,7 @@ Ignore angry dev comment
 On the currently using library there's already a function for that, so the code it's basically done
 
 > [!NOTE]
-> I know that brightness isn't really in the rgb spectrum, so if you have white ```(255, 255, 255)``` and want to lower the brightness you can just do ```(100, 100, 1000)``` but to make it easier i'm adding it
+> I know that brightness isn't really in the rgb spectrum, so if you have white ```(255, 255, 255)``` and want to lower the brightness you can just do ```(100, 100, 100)``` but to make it easier i'm adding it
 
 The brightness function is bassically this:
 ```
