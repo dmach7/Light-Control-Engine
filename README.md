@@ -96,15 +96,16 @@ if (!found && strncmp(input, "brightness ", 11) == 0) {
 ```
 The code is already implemented between the hex support code and the rgb parser!
 
-### Color attaching function
+### Commands
 
-This function will allow the user to attach a certain color to a certain name without having to edit the code so for example we have:
+As i want to add more and more functions to the engine, it needs to have a CLI, to control the system, so by now i'm adding some basic commands that will be inputed directly in serial interface
 
-Before:
-```
-NamedColor colors[] = {
-  {"red",     255, 0,   0  },
-```
-And the user is mid use of the system, don't want to go back and add the color, so he can just do:
-```catalog (
+> [!WARNING]
+> The commands are sensible and don't have the same mechanic as the array, where you can type: red, ReD, RED and etc and it'll still recognise
+
+Some basic commands
+
+array [function] (delete, edit, rename, add)
+
+I'll be leaving the full CLI instructions in a separated file
 
