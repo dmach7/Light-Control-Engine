@@ -74,6 +74,24 @@ Ignore angry dev comment
 
 ## Version 3.0
 
-3.0 almost coming out let's gooo
+For the 3.0 i'm adding the brightness function!
 
+On the currently using library there's already a function for that, so the code it's basically done
+
+> [!NOTE]
+> I know that brightness isn't really in the rgb spectrum, so if you have white ```(255, 255, 255)``` and want to lower the brightness you can just do ```(100, 100, 1000)``` but to make it easier i'm adding it
+
+The brightness function is bassically this:
+```
+// brightness block
+if (!found && strncmp(input, "brightness ", 11) == 0) {
+  int val = atoi(input + 11);
+  val = constrain(val, 0, 255);
+  rgbLed.setBrightness(val);
+  rgbLed.show();
+  Serial.print("Brightness set to: ");
+  Serial.println(val);
+  found = true;
+}
+```
 
