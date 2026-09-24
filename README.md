@@ -75,7 +75,42 @@ void toLowerStr(char* str) {
 
 Ignore angry dev comment
 
-This is it for now, thanks for suporting(no one is supporting) but thanks anyway
+## Version 3.0
 
+### Brightness function
 
+On the currently using library there's already a function for that, so the code it's basically done
+
+> [!NOTE]
+> I know that brightness isn't really in the rgb spectrum, so if you have white ```(255, 255, 255)``` and want to lower the brightness you can just do ```(100, 100, 100)``` but to make it easier i'm adding it
+
+The brightness function is bassically this:
+```
+// brightness block
+if (!found && strncmp(input, "brightness ", 11) == 0) {
+  int val = atoi(input + 11);
+  val = constrain(val, 0, 255);
+  rgbLed.setBrightness(val);
+  rgbLed.show();
+  Serial.print("Brightness set to: ");
+  Serial.println(val);
+  found = true;
+}
+```
+The code is already implemented between the hex support code and the rgb parser!
+
+### Commands
+
+As i want to add more and more functions to the engine, it needs to have a CLI, to control the system, so by now i'm adding some basic commands that will be inputed directly in serial interface
+
+> [!WARNING]
+> The commands are sensible and don't have the same mechanic as the array, where you can type: red, ReD, RED and etc and it'll still recognise
+
+Some basic commands:
+
+display [rgb code, hex code or name)
+
+array [function] (delete, edit, rename, add)
+
+I'll be leaving the full CLI instructions in a separated file
 
