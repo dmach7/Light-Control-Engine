@@ -103,7 +103,9 @@ As i want to add more and more functions to the engine, it needs to have a CLI, 
 > [!WARNING]
 > The commands are sensible and don't have the same mechanic as the array, where you can type: red, ReD, RED and etc and it'll still recognise
 
-Some basic commands
+Some basic commands:
+
+display [rgb code, hex code or name)
 
 array [function] (delete, edit, rename, add)
 
