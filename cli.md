@@ -31,3 +31,7 @@ editcode: system displays full array in numerical order → asks for a number �
 rename: system displays full array in numerical order → asks for a number → asks for new name → returns "Color number # was changed to: name"
 
 unknown function: returns "unknown array function, check https://github.com/dmach7/Light-Control-Engine cli.md"
+
+### return
+
+type esc to go back to home, type back to go back only one step
