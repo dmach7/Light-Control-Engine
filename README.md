@@ -36,7 +36,7 @@ Now you can choose a color WITHOUT having to type the rgb code.
 
 Basically i added an array with maped colors, example red
 
-```
+``` c++
 NamedColor colors[] = {
   {"red",     255, 0,   0  }
 ```
@@ -66,13 +66,16 @@ this function allows almost any type of input, so u don't especifically need to 
 
 Here is the code for the function
 
-```
+<details>
+<summary>Code</summary>
+
+``` c++
 void toLowerStr(char* str) {
   for (int i = 0; str[i]; i++) {
     if (str[i] >= 'A' && str[i] <= 'Z') str[i] += 32;  //this block was a bitch to write, why so complicated, don't ask me how ts works
   }
 ```
-
+</details>
 Ignore angry dev comment
 
 ## Version 3.0
@@ -85,8 +88,10 @@ On the currently using library there's already a function for that, so the code 
 > I know that brightness isn't really in the rgb spectrum, so if you have white ```(255, 255, 255)``` and want to lower the brightness you can just do ```(100, 100, 100)``` but to make it easier i'm adding it
 
 The brightness function is bassically this:
-```
-// brightness block
+<details>
+<summary>Code</summary>
+
+``` c++
 if (!found && strncmp(input, "brightness ", 11) == 0) {
   int val = atoi(input + 11);
   val = constrain(val, 0, 255);
@@ -97,6 +102,7 @@ if (!found && strncmp(input, "brightness ", 11) == 0) {
   found = true;
 }
 ```
+</details>
 The code is already implemented between the hex support code and the rgb parser!
 
 ### Commands

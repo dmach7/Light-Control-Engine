@@ -489,6 +489,3 @@ void loop() {
     Serial.println("Not recognised");  // didnt understand input, i wanted to put "wat" on the output, but the society would judge me😪
   }
 }
-
-// so i asked claude help to map all of the colors codes, so u don't really need to put the code in all of the colors, surely, you will have to search the internet if u want a flying chihuahua of the sahara desert blue, but the main colors are there
-//u can still add colors just by following the pattern, so if u want to add the Goose Turd Green, just put the coma in the last array and add {"Goose Turd Green", 84, 255, 162, 255}
