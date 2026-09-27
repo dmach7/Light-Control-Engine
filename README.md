@@ -1,7 +1,11 @@
-
 # 💡 Light Control Engine
 
-A lightweight RGB lighting control engine for the ESP32-S3, operated entirely through a Serial interface.
+![Status](https://img.shields.io/badge/status-stable-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-ESP32--S3%20%7C%20PlatformIO%2FArduino-green?style=flat-square)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)
+
+> **A lightweight RGB lighting control engine for the ESP32-S3, operated entirely through a Serial interface.**
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/b4f4baac-342b-40a1-9ed0-3bb18b507f26">
@@ -11,13 +15,17 @@ A lightweight RGB lighting control engine for the ESP32-S3, operated entirely th
 
 ---
 
-## 📋 Table of Contents
+## 📑 Table of Contents
+
 - [Overview](#overview)
-- [Version 1.0](#-version-10--basic-rgb-control)
-- [Version 2.0](#-version-20--named-colors--hex-support)
-- [Version 3.0](#-version-30--brightness--cli)
+- [Version 1.0 — Basic RGB Control](#-version-10--basic-rgb-control)
+- [Version 2.0 — Named Colors & Hex Support](#-version-20--named-colors--hex-support)
+- [Version 3.0 — Brightness & CLI](#-version-30--brightness--cli)
 - [Configuration](#️-configuration)
 - [Dependencies](#-dependencies)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -180,7 +188,7 @@ if (!found && strncmp(input, "brightness ", 11) == 0) {
 </details>
 
 > [!WARNING]
-> Brightness values are not persisted across resets. The LED returns to default brightness on reboot.
+> Brightness values are not persisted across resets. The LED returns to default brightness on reboot. (Tracked in [Roadmap](#roadmap).)
 
 ### CLI Commands
 
@@ -260,6 +268,39 @@ flowchart TD
 
 ---
 
-## 📄 License
+## Roadmap
 
-MIT
+> [!NOTE]
+> None of the items below are implemented yet — this is a planning list for future versions, not current behavior.
+
+| Milestone | Target | Status |
+| :---: | :--- | :---: |
+| M1 | Persist brightness/color in EEPROM/NVS (survives reboot) | 🔲 Planned |
+| M2 | Support for multiple LEDs / addressable WS2812 strips | 🔲 Planned |
+| M3 | Animation effects (fade, rainbow, blink) | 🔲 Planned |
+| M4 | Save/load custom color array via Serial command | 🔲 Planned |
+| M5 | Control over WiFi/MQTT (in addition to Serial) | 🔲 Planned |
+
+---
+
+## Contributing
+
+Contributions are very welcome — new color modes, CLI improvements, docs, anything.
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feat/your-feature`
+3. Commit your changes: `git commit -m "feat: describe your change"`
+4. Push and open a Pull Request against `main`
+
+Please open an issue first for anything larger than a bug fix, so we can discuss direction before you invest time building it.
+
+> [!IMPORTANT]
+> When contributing firmware changes, always test on real hardware before submitting a PR. Serial timing and brightness/LED heat behavior can differ from simulated builds.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for the full text.
+
+---
