@@ -3,6 +3,12 @@
 
 A lightweight RGB lighting control engine for the ESP32-S3, operated entirely through a Serial interface.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/b4f4baac-342b-40a1-9ed0-3bb18b507f26">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/f1a5fe65-339a-4f74-b0fc-78669dc42ed9">
+  <img alt="Light Control Engine banner" width="1200" height="300" src="https://github.com/user-attachments/assets/b4f4baac-342b-40a1-9ed0-3bb18b507f26">
+</picture>
+
 ---
 
 ## 📋 Table of Contents
