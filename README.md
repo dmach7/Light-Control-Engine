@@ -1,11 +1,11 @@
-# 🌤️ Weather Station Firmware
+# 💡 Light Control Engine
 
-![Status](https://img.shields.io/badge/status-WIP-orange?style=flat-square)
+![Status](https://img.shields.io/badge/status-stable-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-ESP32%20%7C%20PlatformIO%2FArduino-green?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-ESP32--S3%20%7C%20PlatformIO%2FArduino-green?style=flat-square)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)
 
-> **A feature-rich embedded weather station built around a TFT display and rotary encoder, reading from a suite of environmental sensors with derived metrics, smoothing, and threshold alerts.**
+> **A lightweight RGB lighting control engine for the ESP32-S3, operated entirely through a Serial interface.**
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/4cc02403-c034-4807-ae28-08a108b44d10">
@@ -15,8 +15,17 @@
 
 ---
 
-> [!WARNING]
-> This project is under active development. Hardware has not been assembled yet — no sensors are currently attached. Behavior described below reflects the intended firmware design.
+## 📑 Table of Contents
+
+- [Overview](#overview)
+- [Version 1.0 — Basic RGB Control](#-version-10--basic-rgb-control)
+- [Version 2.0 — Named Colors & Hex Support](#-version-20--named-colors--hex-support)
+- [Version 3.0 — Brightness & CLI](#-version-30--brightness--cli)
+- [Configuration](#️-configuration)
+- [Dependencies](#-dependencies)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -163,7 +172,23 @@ weather-station/
 └── README.md
 ```
 
----
+</details>
+
+> [!WARNING]
+> Brightness values are not persisted across resets. The LED returns to default brightness on reboot. (Tracked in [Roadmap](#roadmap).)
+
+### CLI Commands
+
+> [!WARNING]
+> Commands are case-sensitive and do not use the same normalisation as color names. Type them exactly as shown.
+
+| Command | Arguments | Description |
+| --- | --- | --- |
+| `display` | rgb code, hex code or name | Set the LED color |
+| `array add` | name r g b | Add a new named color |
+| `array edit` | name r g b | Edit an existing color |
+| `array rename` | old-name new-name | Rename a color entry |
+| `array delete` | name | Remove a color from the array |
 
 ## PinMode
 
@@ -250,22 +275,21 @@ Key parameters live in `include/config.h`:
 ## Roadmap
 
 > [!NOTE]
-> None of the items below are implemented yet — this is a planning list for future versions, not current behavior. In particular, no sensors are physically attached yet, so all sensor-related behavior described above is the intended design, not verified output.
+> None of the items below are implemented yet — this is a planning list for future versions, not current behavior.
 
 | Milestone | Target | Status |
 | :---: | :--- | :---: |
-| M1 | Assemble and read real sensors (currently no hardware attached) | 🔲 Planned |
-| M2 | Historical logging to SD card / flash | 🔲 Planned |
-| M3 | Publish readings over WiFi/MQTT (remote dashboard) | 🔲 Planned |
-| M4 | GPS/GNSS module support for precise altitude | 🔲 Planned |
-| M5 | Guided sensor calibration via on-device menu | 🔲 Planned |
-| M6 | Configurable alerts via app/web (beyond the on-device TFT) | 🔲 Planned |
+| M1 | Persist brightness/color in EEPROM/NVS (survives reboot) | 🔲 Planned |
+| M2 | Support for multiple LEDs / addressable WS2812 strips | 🔲 Planned |
+| M3 | Animation effects (fade, rainbow, blink) | 🔲 Planned |
+| M4 | Save/load custom color array via Serial command | 🔲 Planned |
+| M5 | Control over WiFi/MQTT (in addition to Serial) | 🔲 Planned |
 
 ---
 
 ## Contributing
 
-Contributions are very welcome — new sensor drivers, UI improvements, derived-metric formulas, docs, anything.
+Contributions are very welcome — new color modes, CLI improvements, docs, anything.
 
 1. Fork the repo
 2. Create a feature branch: `git checkout -b feat/your-feature`
@@ -275,12 +299,12 @@ Contributions are very welcome — new sensor drivers, UI improvements, derived-
 Please open an issue first for anything larger than a bug fix, so we can discuss direction before you invest time building it.
 
 > [!IMPORTANT]
-> When contributing firmware changes, always test on real hardware before submitting a PR — sensor timing and SMA smoothing behavior can differ from simulated builds.
+> When contributing firmware changes, always test on real hardware before submitting a PR. Serial timing and brightness/LED heat behavior can differ from simulated builds.
 
 ---
 
-## 📄 License
+## License
 
-MIT
+This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for the full text.
 
 ---
