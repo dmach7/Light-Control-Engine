@@ -1148,6 +1148,7 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 | M3        | Animation effects (fade, rainbow, blink)                      | 🚧 In progress  |
 | M4        | Save/load custom color array via Serial command               | 🔲 Planned      |
 | M5        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
+| M6        | Be able to change the fade graph curve                        | 🔲 Planned      |
 
 M1 landed in 3.0 (colors persist; brightness was removed in 4.0). M3 started with fades in 4.0, rainbow and blink are still to come.
 
