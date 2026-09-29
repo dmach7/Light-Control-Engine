@@ -12,7 +12,7 @@
   <img alt="Light Control Engine banner" src="https://github.com/user-attachments/assets/344011f8-3df6-45d9-aab3-54de69b98057">
 </picture>
 
----
+----
 
 ## 📑 Table of Contents
 
