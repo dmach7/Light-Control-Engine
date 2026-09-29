@@ -163,6 +163,17 @@ The max time is **3600s (1h)** per phase. Fade in and fade out can't be `0`; hol
 
 `fade` uses a normal (linear) curve, `fadeg` uses gamma correction. Same flow, same prompts, same saving — only the curve changes, and it is saved with the fade.
 
+<details>
+<summary><b>Flowchart view</b></summary>
+
+```mermaid
+flowchart TD
+    A([Boot]) --> B[Init NeoPixel\nGPIO 48]
+    B --> C[Wait for Serial input]
+    C --> D[Parse R G B values]
+    D --> E[setPixelColor]
+    E --> F[show]
+    F --> C
 ```
 linear: level = t
 gamma:  level = t ^ 2.2
