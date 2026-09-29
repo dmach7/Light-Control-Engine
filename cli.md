@@ -137,129 +137,183 @@ they work in every prompt (hold time, Add fade out?, Execute now?, edit steps, a
 <details>
 <summary><b>Flowchart view</b></summary>
 
+## Rules
+
+| Topic | Rule |
+| ----- | ---- |
+| Colors | Name (default or custom), `#hex`, or `rgb(r g b)` |
+| Times | Always with a suffix: `1.5s` or `1500ms`. Max `3600s` |
+| `esc` | Works in every prompt, goes back to the menu |
+| `back` | Works in every prompt, goes one step back |
+| Fade running | `display`, `fade`, `fadeg`, `fades run` and `delete all` are blocked. Type `stop` to cancel it |
+| Limits | 20 custom colors, 30 saved fades |
+| Fades | Always start from black. You can't fade to black. `fade` = linear, `fadeg` = gamma |
+| Saved data | Custom colors and fades survive a reboot |
+
+## 1. Main menu
+
 ```mermaid
 flowchart TD
-    START([Serial Input]) --> ROUTE{Command?}
+    classDef cmd fill:#d0ebff,stroke:#1971c2,color:#111111,stroke-width:2px
+    classDef out fill:#d3f9d8,stroke:#2f9e44,color:#111111,stroke-width:2px
+    classDef err fill:#ffe3e3,stroke:#e03131,color:#111111,stroke-width:2px
 
-    %% HELP
-    ROUTE -->|/help| HELP[Print: Check the full CLI reference at:\ngithub.com/dmach7/Light-Control-Engine\nnavigate to cli.md in the main tree]
-    HELP --> START
+    P(["Prompt >"]) --> C{"What do you type?"}
+    C -->|"/help"| H["Shows the CLI reference link"]
+    C -->|"display color"| D["Shows the color on the LED"]
+    C -->|"array ..."| A["Manage custom colors<br/>(section 2)"]
+    C -->|"fade or fadeg color time"| F["Create a fade<br/>(section 3)"]
+    C -->|"fades ..."| FS["Manage saved fades<br/>(section 4)"]
+    C -->|"stop"| S["Cancels the running fade<br/>LED off, fade stays saved"]
+    C -->|"delete all"| W["Factory reset<br/>asks Y/N first"]
+    C -->|"anything else"| U["Not recognised"]
 
-    %% DISPLAY
-    ROUTE -->|display| DISP_BUSY{Fade running?}
-    DISP_BUSY -->|Yes| BUSY[Print: led busy\ntype stop to cancel it]
-    BUSY --> START
-    DISP_BUSY -->|No| DISP_TYPE{Input type?}
-    DISP_TYPE -->|name| DISP_LOOKUP{Found in array?}
-    DISP_TYPE -->|rgb r g b| DISP_APPLY
-    DISP_TYPE -->|#HEX| DISP_APPLY
-    DISP_LOOKUP -->|Yes| DISP_APPLY[setPixelColor + show\nfull brightness]
-    DISP_LOOKUP -->|No| DISP_NOT[Print: display error\ncolor not recognised]
-    DISP_NOT --> START
-    DISP_APPLY --> START
+    H --> P
+    D --> P
+    A --> P
+    F --> P
+    FS --> P
+    S --> P
+    W --> P
+    U --> P
 
-    %% ARRAY
-    ROUTE -->|array| ARR_FN{Function?}
-
-    %% array add
-    ARR_FN -->|add| ADD_NAME[Ask: Name]
-    ADD_NAME --> ADD_CODE[Ask: Code\nrgb or hex]
-    ADD_CODE --> ADD_SAVE[Save name + code\nto NVS/Preferences]
-    ADD_SAVE --> ADD_OK[Print: Color successfully attached]
-    ADD_OK --> START
-
-    %% array delete
-    ARR_FN -->|delete| DEL_LIST[Display full array\nin numerical order]
-    DEL_LIST --> DEL_ASK[Ask: Number]
-    DEL_ASK --> DEL_DO[Remove from NVS/Preferences]
-    DEL_DO --> DEL_OK[Print: Color: name, Number # was deleted]
-    DEL_OK --> START
-
-    %% array editcode
-    ARR_FN -->|editcode| EDIT_LIST[Display full array\nin numerical order]
-    EDIT_LIST --> EDIT_ASK[Ask: Number]
-    EDIT_ASK --> EDIT_CODE[Ask: New code\nrgb or hex]
-    EDIT_CODE --> EDIT_SAVE[Update NVS/Preferences]
-    EDIT_SAVE --> EDIT_OK[Print: Color: name, Number # was changed to\nnew code]
-    EDIT_OK --> START
-
-    %% array rename
-    ARR_FN -->|rename| REN_LIST[Display full array\nin numerical order]
-    REN_LIST --> REN_ASK[Ask: Number]
-    REN_ASK --> REN_NAME[Ask: New name]
-    REN_NAME --> REN_SAVE[Update NVS/Preferences]
-    REN_SAVE --> REN_OK[Print: Color number # was changed to: name]
-    REN_OK --> START
-
-    %% array delete all
-    ARR_FN -->|delete all| WIPE_BUSY{Fade running?}
-    WIPE_BUSY -->|Yes| BUSY
-    WIPE_BUSY -->|No| WIPE_ASK{Are you sure? Y/N}
-    WIPE_ASK -->|Y| WIPE_DO[Wipe colors + fades\nfactory state]
-    WIPE_DO --> WIPE_OK[Print: Memory wiped, back to factory]
-    WIPE_OK --> START
-    WIPE_ASK -->|N| WIPE_NO[Print: Cancelled]
-    WIPE_NO --> START
-
-    %% array unknown
-    ARR_FN -->|unknown| ARR_ERR[Print: unknown array function\ncheck github.com/dmach7/Light-Control-Engine cli.md]
-    ARR_ERR --> START
-
-    %% FADE / FADEG
-    ROUTE -->|fade / fadeg| FADE_BUSY{Fade running?}
-    FADE_BUSY -->|Yes| BUSY
-    FADE_BUSY -->|No| FADE_PARSE[Split at last space\nlast word = fade in time\nrest = color]
-    FADE_PARSE --> FADE_CHECK{Color and time valid?\nstorage not full?}
-    FADE_CHECK -->|No| FADE_ERR[Print: fade error]
-    FADE_ERR --> START
-    FADE_CHECK -->|Yes| FADE_HOLD[Ask: Hold time]
-    FADE_HOLD --> FADE_OUT_Q{Add fade out? Y/N}
-    FADE_OUT_Q -->|Y| FADE_OUT_T[Ask: Fade out time]
-    FADE_OUT_T --> FADE_SAVE_OUT[Save fade to NVS/Preferences]
-    FADE_SAVE_OUT --> FADE_OK_OUT[Print: fade successfully created,\nsaved by number #]
-    FADE_OUT_Q -->|N| FADE_SAVE[Save fade to NVS/Preferences]
-    FADE_SAVE --> FADE_OK[Print: fade successfully created\nas number #]
-    FADE_OK_OUT --> FADE_EXEC{Execute now? Y/N}
-    FADE_OK --> FADE_EXEC
-    FADE_EXEC -->|N| START
-    FADE_EXEC -->|Y| RUN
-
-    %% FADES
-    ROUTE -->|fades| FS_FN{Function?}
-    FS_FN -->|list| FS_LIST[Display all fades\nin numerical order]
-    FS_LIST --> START
-    FS_FN -->|run| FS_RUN_BUSY{Fade running?}
-    FS_RUN_BUSY -->|Yes| BUSY
-    FS_RUN_BUSY -->|No| FS_RUN_NUM[Number inline\nor list + ask number]
-    FS_RUN_NUM --> RUN
-    FS_FN -->|delete| FS_DEL_NUM[Number inline\nor list + ask number]
-    FS_DEL_NUM --> FS_DEL_OK[Remove from NVS/Preferences\nPrint: Fade number # was deleted]
-    FS_DEL_OK --> START
-    FS_FN -->|edit| FS_EDIT_NUM[Number inline\nor list + ask number]
-    FS_EDIT_NUM --> FS_EDIT_WHAT[Ask: Edit what?\ncolor / in / hold / out]
-    FS_EDIT_WHAT --> FS_EDIT_VAL[Ask: new value]
-    FS_EDIT_VAL --> FS_EDIT_OK[Update NVS/Preferences\nPrint: Fade number #: ... was changed]
-    FS_EDIT_OK --> START
-    FS_FN -->|unknown| FS_ERR[Print: unknown fades function\ncheck github.com/dmach7/Light-Control-Engine cli.md]
-    FS_ERR --> START
-
-    %% RUN (background)
-    RUN([Print: Running fade number #\nfade runs in the background]) --> START
-
-    %% STOP
-    ROUTE -->|stop| STOP_Q{Fade running?}
-    STOP_Q -->|Yes| STOP_DO[LED off immediately\nfade stays saved\nPrint: Fade stopped]
-    STOP_Q -->|No| STOP_NO[Print: stop: nothing is running]
-    STOP_DO --> START
-    STOP_NO --> START
-
-    %% NAVIGATION
-    ROUTE -->|unknown command| UNKNOWN[Print: Not recognised]
-    UNKNOWN --> START
-
-    %% ESC / BACK
-    ROUTE -->|esc| HOME([Return to home])
-    ROUTE -->|back| PREV([Return one step back])
+    class C,P cmd
+    class H,D,A,F,FS,S,W out
+    class U err
 ```
 
+## 2. Custom colors (`array`)
+
+```mermaid
+flowchart TD
+    classDef cmd fill:#d0ebff,stroke:#1971c2,color:#111111,stroke-width:2px
+    classDef ask fill:#e5dbff,stroke:#7048e8,color:#111111,stroke-width:2px
+    classDef out fill:#d3f9d8,stroke:#2f9e44,color:#111111,stroke-width:2px
+    classDef err fill:#ffe3e3,stroke:#e03131,color:#111111,stroke-width:2px
+
+    A{"array what?"}
+
+    A -->|"add"| A1[\"Name?"\]
+    A1 -->|"name already used"| E1["Error, asks again"]
+    A1 --> A2[\"Code? rgb or #hex"\]
+    A2 -->|"invalid code"| E2["Error, asks again"]
+    A2 --> A3["Color attached and saved"]
+
+    A -->|"delete"| L1["Shows the color list"]
+    A -->|"editcode"| L1
+    A -->|"rename"| L1
+    L1 --> N[\"Number?"\]
+    N -->|"invalid or default color"| E3["Error, asks again<br/>default colors are locked"]
+    N --> ACT{"Which action?"}
+    ACT -->|"delete"| R1["Color deleted<br/>numbers shift down"]
+    ACT -->|"editcode"| R2[\"New code?"\] --> R2o["Code changed and saved"]
+    ACT -->|"rename"| R3[\"New name?"\] --> R3o["Name changed and saved"]
+
+    A -->|"delete all"| W["Same as the global<br/>delete all"]
+
+    class A,ACT cmd
+    class A1,A2,N,R2,R3 ask
+    class A3,R1,R2o,R3o,L1,W out
+    class E1,E2,E3 err
+```
+
+> [!NOTE]
+> `delete`, `editcode` and `rename` say "no custom colors yet" if you haven't added any.
+
+## 3. Creating a fade (`fade` / `fadeg`)
+
+```mermaid
+flowchart TD
+    classDef cmd fill:#d0ebff,stroke:#1971c2,color:#111111,stroke-width:2px
+    classDef ask fill:#e5dbff,stroke:#7048e8,color:#111111,stroke-width:2px
+    classDef out fill:#d3f9d8,stroke:#2f9e44,color:#111111,stroke-width:2px
+    classDef err fill:#ffe3e3,stroke:#e03131,color:#111111,stroke-width:2px
+
+    S(["fade color time<br/>example: fade red 1.5s"]) --> CHK{"Valid?"}
+    CHK -->|"fade running, storage full,<br/>bad color, black, bad time"| E["Error, nothing is created"]
+    CHK -->|"OK"| H[\"Hold time?<br/>how long it stays lit, 0 allowed"\]
+    H --> O[\"Add fade out? Y/N"\]
+    O -->|"Y"| OT[\"Fade out time?"\]
+    O -->|"N"| SV["Fade saved<br/>(hold still applies)"]
+    OT --> SV2["Fade saved with fade out"]
+    SV --> X[\"Execute now? Y/N"\]
+    SV2 --> X
+    X -->|"Y"| R["Running fade number #<br/>starts from black"]
+    X -->|"N"| K["Stays saved for later"]
+
+    class S,CHK cmd
+    class H,O,OT,X ask
+    class SV,SV2,R,K out
+    class E err
+```
+
+Phases of a fade: **fade in** → **hold** → **fade out** (optional). Without a fade out, the LED turns off right after the hold. Nothing is printed when a fade ends.
+
+## 4. Saved fades (`fades`)
+
+```mermaid
+flowchart TD
+    classDef cmd fill:#d0ebff,stroke:#1971c2,color:#111111,stroke-width:2px
+    classDef ask fill:#e5dbff,stroke:#7048e8,color:#111111,stroke-width:2px
+    classDef out fill:#d3f9d8,stroke:#2f9e44,color:#111111,stroke-width:2px
+    classDef err fill:#ffe3e3,stroke:#e03131,color:#111111,stroke-width:2px
+
+    F{"fades what?"}
+
+    F -->|"list"| L["Shows all fades<br/>number, color, curve, in, hold, out"]
+
+    F -->|"run"| R1["Number typed inline?<br/>example: fades run 2"]
+    R1 -->|"no"| R2[\"Number to run?"\]
+    R1 -->|"yes"| R3["Running fade number #"]
+    R2 --> R3
+
+    F -->|"delete"| D1[\"Number to delete?"\] --> D2["Fade deleted<br/>numbers shift down"]
+
+    F -->|"edit"| E1[\"Number to edit?"\]
+    E1 --> E2[\"Edit what?<br/>color, in, hold, out"\]
+    E2 --> E3[\"New value"\]
+    E3 --> E4["Fade updated and saved"]
+
+    F -->|"no fades saved"| NF["fades error: no fades saved yet"]
+    F -->|"invalid number"| IN["fades error: invalid number"]
+
+    class F,R1 cmd
+    class R2,D1,E1,E2,E3 ask
+    class L,R3,D2,E4 out
+    class NF,IN err
+```
+
+> [!TIP]
+> For `run`, `delete` and `edit` you can type the number right away (`fades delete 3`) or leave it out and the CLI asks for it.
+> For `out` in `fades edit`, type `none` to remove the fade out.
+> Deleting or editing a fade while it runs doesn't stop it. The running fade is a copy and keeps playing.
+
+## 5. Factory reset (`delete all`)
+
+```mermaid
+flowchart LR
+    classDef ask fill:#e5dbff,stroke:#7048e8,color:#111111,stroke-width:2px
+    classDef out fill:#d3f9d8,stroke:#2f9e44,color:#111111,stroke-width:2px
+    classDef err fill:#ffe3e3,stroke:#e03131,color:#111111,stroke-width:2px
+
+    S(["delete all"]) --> B{"Fade running?"}
+    B -->|"yes"| E["Blocked, type stop first"]
+    B -->|"no"| W["Warns: deletes ALL colors and fades"]
+    W --> Q[\"Are you sure? Y/N"\]
+    Q -->|"Y"| OK["Memory wiped, LED off,<br/>back to factory"]
+    Q -->|"N"| C["Cancelled"]
+
+    class Q ask
+    class OK,C,W out
+    class E err
+```
+
+## Legend
+
+| Color | Meaning |
+| ----- | ------- |
+| 🟦 Blue | Command or decision |
+| 🟪 Purple | The CLI asks you something and waits |
+| 🟩 Green | Normal result |
+| 🟥 Red | Error or blocked |
 </details>
