@@ -1160,6 +1160,8 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 | M7        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
 | M8        | Be able to change the fade graph curve                        | 🚧 In progress(Coming out in 5.0)      |
 | M9        | Control over other peripherals(servo, motor, relay and etc    | 🔲 Planned (coming in 6.0)
+| M10       | Be able to attach sd card for almost unlimited storage        | 🔲 Planned (coming in 6.0)
+| M11       | Be able to attach external processor for better rending NeoPixel strips | 🔲 Planned (coming in 6.0)
 
 M1 landed in 3.0 (colors persist; brightness was removed in 4.0). M3 started with fades in 4.0, rainbow and blink are still to come.
 
