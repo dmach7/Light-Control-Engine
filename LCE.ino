@@ -13,6 +13,8 @@
 // colors are {name, r, g, b} now, so that 4th number in the examples up there? delete it or it won't compile
 // old saved colors (the ones with brightness) get converted on the first boot of 4.0, the brightness gets dropped, the colors stay
 // claude did the heavy lifting again, same deal as 3.0, still not judging
+//V5.0
+// it is not done yet, this the same code as 4.0 same thing with the cli
 
 #include <Adafruit_NeoPixel.h>
 #include <Preferences.h>
