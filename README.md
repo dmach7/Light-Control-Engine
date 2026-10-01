@@ -57,7 +57,7 @@ led.show();                                 // apply it physically
 
 
 > [!IMPORTANT]
-> The full CLI reference for 4.0 is in [cli.md](cli.md).
+> The full CLI reference for 5.0 is in [cli.md](cli.md).
 
 ---
 
