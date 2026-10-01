@@ -17,15 +17,16 @@
 ## 📑 Table of Contents
 
 - [Overview](#overview)
-- [Version 4.0 — Fades](#-version-40--fades)
-- [Configuration](#%EF%B8%8F-configuration)
-- [Dependencies](#-dependencies)
+- [Version 5.0 — Physical imersion](#version-5)
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 
----
 
+---
+<a id="overview"></a>
 ## Overview
 
 The ESP32-S3 onboard RGB LED is driven by a **single pin (GPIO 48)** using the NeoPixel protocol — no separate R/G/B pins required.
@@ -50,8 +51,9 @@ led.show();                                 // apply it physically
 ---
 > [!NOTE]
 > I removed previous versions notes.
-  
-## 🌅 Version 4.0 — Fades
+
+<a id="version-5"></a>
+## 🌅 Version 5.0 — Physical imersion
 
 4.0 adds the **effects CLI**, starting with **fades**: the LED goes from off up to a color, stays lit for a while, and optionally goes back down to off. It also removes brightness completely.
 
@@ -1104,6 +1106,7 @@ flowchart TD
 
 ---
 
+<a id="configuration"></a>
 ## ⚙️ Configuration
 
 ```cpp
@@ -1126,6 +1129,7 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 
 ---
 
+<a id="dependencies"></a>
 ## 📦 Dependencies
 
 - [Adafruit NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel) — LED driver
@@ -1136,6 +1140,8 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 
 ---
 
+
+<a id="roadmap"></a>
 ## Roadmap
 
 > [!NOTE]
@@ -1155,6 +1161,8 @@ M1 landed in 3.0 (colors persist; brightness was removed in 4.0). M3 started wit
 
 ---
 
+
+<a id="contributing"></a>
 ## Contributing
 
 Contributions are very welcome — new color modes, CLI improvements, docs, anything.
@@ -1171,6 +1179,7 @@ Please open an issue first for anything larger than a bug fix, so we can discuss
 
 ---
 
+<a id="license"></a>
 ## License
 
 This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for the full text.
