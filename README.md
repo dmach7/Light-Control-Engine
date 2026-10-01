@@ -8,8 +8,8 @@
 > **A lightweight RGB lighting control engine for the ESP32-S3, operated entirely through a Serial interface.**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/b727d80a-9e4f-4a8d-9a36-24389212e693">
-  <img src="https://github.com/user-attachments/assets/9fb87544-eb19-4efe-98e2-f9af064e90eb" alt="Light Control Engine banner">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/adacb953-3634-4590-8384-f0e306ec3d3a">
+  <img alt="Light Control Engine banner" src="https://github.com/user-attachments/assets/344011f8-3df6-45d9-aab3-54de69b98057">
 </picture>
 ----
 
@@ -1159,7 +1159,7 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 | M5        | Animation effects (fade, rainbow, blink)                      | 🚧 In progress(fade already in, rest of it in 5.0)  |
 | M7        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
 | M8        | Be able to change the fade graph curve                        | 🚧 In progress(Coming out in 5.0)      |
-| M9        | Control over other peripherals(servo, motor, relay and etc    | 🔲 Planned (coming in 6.0)
+| M9        | Control over other peripherals(servo, motor, relay and etc)    | 🔲 Planned (coming in 6.0)
 | M10       | Be able to attach sd card for almost unlimited storage        | 🔲 Planned (coming in 6.0)
 | M11       | Be able to attach external processor for better rending NeoPixel strips | 🔲 Planned (coming in 6.0)
 
