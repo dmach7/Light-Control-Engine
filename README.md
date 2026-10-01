@@ -49,8 +49,7 @@ led.show();                                 // apply it physically
 ```
 
 ---
-> [!NOTE]
-> I removed previous versions notes.
+
 
 <a id="version-5"></a>
 ## 🌅 Version 5.0 — Physical imersion
