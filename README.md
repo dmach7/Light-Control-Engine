@@ -1156,10 +1156,11 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 | :-------: | :------------------------------------------------------------ | :------------: |
 | M1        | Persist colors in EEPROM/NVS (survives reboot)                | ✅ Done         |
 | M2        | Support for multiple LEDs / addressable WS2812 strips         | 🔲 Planned      |
-| M3        | Animation effects (fade, rainbow, blink)                      | 🚧 In progress  |
-| M4        | Save/load custom color array via Serial command               | 🔲 Planned      |
-| M5        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
-| M6        | Be able to change the fade graph curve                        | 🔲 Planned(Coming out in 5.0)      |
+| M4        | Support for multiple LEDs /                                   | 🚧 In progress(Coming in 5.0)     |
+| M5        | Animation effects (fade, rainbow, blink)                      | 🚧 In progress(fade already in, rest of it in 5.0)  |
+| M6        | Save/load custom color array via Serial command               | 🚧 In progress(Coming in 5.0)    |
+| M7        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
+| M8        | Be able to change the fade graph curve                        | 🚧 In progress(Coming out in 5.0)      |
 
 M1 landed in 3.0 (colors persist; brightness was removed in 4.0). M3 started with fades in 4.0, rainbow and blink are still to come.
 
