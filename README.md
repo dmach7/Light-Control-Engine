@@ -110,7 +110,7 @@ The Serial baud rate is `115200`, set directly in `setup()`.
 | M4        | TFT Screen and encoder control                                | ✅ Done   |
 | M5        | Animation effects (fade, rainbow, blink)                      | ✅ Done   |
 | M6        | Control over WiFi/MQTT (in addition to Serial)                | 🔲 Planned      |
-| M7        | Be able to control real BMX tables                            | 🔲 Planned |
+| M7        | Be able to control real DMX tables                            | 🔲 Planned |
 | M8        | Be able to change the fade graph curve                        | ✅ Done      |
 | M9        | Control over other peripherals(servo, motor, relay and etc)    | 🔲 Planned (coming in 6.0)
 | M10       | Be able to attach sd card for almost unlimited storage        | 🔲 Planned (coming in 6.0)
