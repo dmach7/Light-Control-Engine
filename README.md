@@ -52,7 +52,7 @@ led.show();                                 // apply it physically
 
 
 <a id="version-5"></a>
-## 🌅 Version 5.0 — Physical imersion
+## 🌅 Version 5.0 — Physical immersion
 
 
 
